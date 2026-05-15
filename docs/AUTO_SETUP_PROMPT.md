@@ -35,53 +35,23 @@ fi
 
 ## 2단계: 사용자에게 모델 선택 받기
 
-아래 카테고리를 사용자에게 보여주고, 사용할 모델을 선택받아:
+**⚠️ 중요: 모델 목록은 하드코딩하지 마!**
 
-### 🤖 에이전트 모드 (Tool Calling 지원)
-이 모델들은 Hermes의 핵심 기능(파일 읽기, 터미널, 웹 검색 등)을 사용할 수 있어.
+1단계에서 clone한 레포의 `docs/RECOMMENDED_MODELS.md` 파일을 반드시 읽어.
+이 파일에는 레포 관리자가 최신으로 유지하는 추천 모델 목록이 들어있어.
+아래는 **예시일 뿐**이니, 실제 파일에서 카테고리와 모델명을 읽어서 사용자에게 보여줘.
 
-| 모델 | 특징 |
-|------|------|
-| `deepseek/deepseek-v4-flash` | 빠르고 저렴, 범용 |
-| `deepseek/deepseek-v4-pro` | 고품질, 코딩 특화 |
-| `deepseek/deepseek-v4-pro-cheaper` | Pro 대비 저렴 |
-| `deepseek/deepseek-v4-flash:thinking` | reasoning 모드 |
-| `deepseek/deepseek-v4-pro:thinking` | 고품질 reasoning |
-| `xiaomi/mimo-v2.5-pro` | 균형 잡힌 범용 |
-| `moonshotai/kimi-k2.6` | 한국어 강점 |
-| `moonshotai/kimi-k2.6:thinking` | 한국어 reasoning |
-| `zai-org/glm-5.1` | 중국어 강점 |
-| `zai-org/glm-5.1:thinking` | GLM reasoning |
-| `minimax/minimax-m2.7` | 대안 모델 |
+```
+읽어야 할 파일: $HOME/.hermes/hermes-nanogpt-integration/docs/RECOMMENDED_MODELS.md
+```
 
-### 📖 롤플레이 / 창작 (Derestricted)
-제한이 완화된 모델. Tool calling 미지원 가능.
+파일을 읽은 후:
+1. 각 카테고리(에이전트 모드, 롤플레이/창작 등)의 모델을 사용자에게 표로 보여줘
+2. 사용자에게 물어봐:
+   - "어떤 용도로 사용하실 건가요? (에이전트/롤플레이/Both)"
+   - "위 목록에서 사용할 모델을 선택해주세요. 여러 개 선택 가능합니다."
+   - "기본 모델로 사용할 모델을 하나 선택해주세요."
 
-| 모델 | 특징 |
-|------|------|
-| `Gemma-4-31B-DarkIdol` | 인기 롤플레이 |
-| `Gemma-4-31B-Queen` | Gemma 기반 |
-| `Gemma-4-31B-Cognitive-Unshackled` | 창의적 글쓰기 |
-| `gemma-4-31B-MeroMero` | 일본 스타일 |
-| `Qwen3.5-27B-Queen-Derestricted` | Qwen 롤플레이 |
-| `Qwen3.5-27B-RpRMax-v1` | 롤플레이 특화 |
-| `Qwen3.5-27B-NaNovel-Derestricted` | 소설/이야기 |
-| `Qwen3.5-27B-BlueStar-v3-Derestricted` | 다목적 |
-| `Qwen3.5-27B-Infracelestial` | 판타지 |
-| `Qwen3.5-27B-earica-Derestricted` | 대화 특화 |
-| `Qwen3.5-27B-Marvin-DPO-V2-Derestricted` | DPO 최적화 |
-| `Qwen3.5-27B-Omega-Evolution-v2.2-Derestricted` | 진화형 |
-
-### 🔬 기타
-| 모델 | 특징 |
-|------|------|
-| `huihui-ai/DeepSeek-R1-Distill-Qwen-32B-abliterated` | 탈감화 모델 |
-| `nousresearch/hermes-3-llama-3.1-70b` | Hermes 원본 |
-
-사용자에게 물어봐:
-1. "어떤 용도로 사용하실 건가요? (에이전트/롤플레이/Both)"
-2. "위 목록에서 사용할 모델을 선택해주세요. 여러 개 선택 가능합니다."
-3. "기본 모델로 사용할 모델을 하나 선택해주세요."
 
 ## 3단계: NanoGPT API 키 확인
 
@@ -192,12 +162,21 @@ hermes gateway restart
 ## 에러 발생 시
 
 아래 파일을 참조하여 해결해줘:
-`$HOME/.hermes/hermes-nanogpt-integration/docs/TROUBLESHOOTING.md`
+- `$HOME/.hermes/hermes-nanogpt-integration/docs/TROUBLESHOOTING.md`
 
 주요 오류:
 - **401 Unauthorized** → `key_env` 필드명 확인 (`api_key_env` ❌)
 - **Model not found** → `discover_models: false` 설정 확인
 - **Unknown provider** → 모델명 구분자가 `:`인지 확인 (`/` ❌)
+
+---
+
+## 관련 문서
+
+- `docs/RECOMMENDED_MODELS.md` — 레포 관리자가 관리하는 최신 추천 모델 목록 (2단계에서 반드시 참조)
+- `docs/SETUP_GUIDE.md` — 수동 설정 가이드
+- `docs/TROUBLESHOOTING.md` — 실전 오류 해결법
+- `docs/MULTI_PROFILE.md` — 다중 프로필 분리 운영
 
 ---
 
