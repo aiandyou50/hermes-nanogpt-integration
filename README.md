@@ -11,11 +11,11 @@ Hermes AI 에이전트에서 NanoGPT를 추가 공급자로 등록하여 600개 
 **$12/월 멤버십 혜택:**
 - 📊 주 60,000,000 토큰 사용 가능
 - 🖼️ 매일 100개 이미지 생성
-- 🤖 600개 이상의 AI 모델 접근
+- 🤖 600개 이상의 AI 모델 접근 (일무 모델 무료사용)
 
 ### Hermes AI와의 통합
 
-**Hermes AI** (https://github.com/NousResearch/hermes-agent)는 오픈소스 AI 에이전트 프레임워크로, 여러 공급자를 지원합니다.
+**Hermes AI** (https://github.com/NousResearch/hermes-agent) 는 오픈소스 AI 에이전트 프레임워크로, 여러 공급자를 지원합니다.
 
 이 가이드는 NanoGPT를 Hermes AI의 새로운 공급자로 추가하여 `/model` 명령어로 모델을 전환하는 방법을 제시합니다.
 
