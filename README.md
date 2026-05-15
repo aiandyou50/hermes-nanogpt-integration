@@ -21,7 +21,7 @@ Hermes AI 에이전트에서 NanoGPT를 추가 공급자로 등록하여 사용�
 
 ### 🔌 Hermes AI와의 통합
 
-**Hermes AI** (https://github.com/NousResearch/hermes-agent)는 오픈소스 AI 에이전트 프레임워크로, 여러 공급자(Provider)를 지원하여 다양한 AI 모델을 통합 관리할 수 있습니다.
+**Hermes AI** (https://github.com/NousResearch/hermes-agent) 는 오픈소스 AI 에이전트 프레임워크로, 여러 공급자(Provider)를 지원하여 다양한 AI 모델을 통합 관리할 수 있습니다.
 
 이 가이드는 **NanoGPT를 Hermes AI의 새로운 공급자로 추가**하여 `/model` 명령어로 NanoGPT의 모델을 사용할 수 있는 방법을 제시합니다.
 
