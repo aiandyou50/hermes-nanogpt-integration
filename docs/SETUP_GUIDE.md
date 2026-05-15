@@ -13,7 +13,7 @@ Hermes AI에 NanoGPT를 커스텀 공급자로 등록하여 600개 이상의 AI 
 1. https://nano-gpt.com/ 접속 후 로그인
 2. 대시보드에서 **API Keys** 메뉴 진입
 3. **Create New Key** 클릭
-4. 생성된 키를 복사 (형식: `sk-nano-xxxx-xxxx-xxxx`)
+4. 생성된 키를 복사 (형식: `sk-nan...xxxx`)
 
 > ⚠️ API 키는 한 번만 표시됩니다. 반드시 안전한 곳에 저장하세요.
 
@@ -83,7 +83,7 @@ providers:
 | 설정 | 값 | 이유 |
 |------|-----|------|
 | `key_env` | `"NANOGPT_API_KEY"` | **`api_key_env`가 아닙니다!** 이 필드명을 틀리면 401 오류가 발생합니다 |
-| `discover_models` | `false` | **안 하면 API의 600+개 모델이 모두 로드되어 목록이混乱됩니다** |
+| `discover_models` | `false` | **안 하면 API의 600+개 모델이 모두 로드되어 목록이혼란됩니다** |
 | `base_url` | `"https://nano-gpt.com/api/v1"` | 반드시 `/v1` 포함 |
 
 ## 4단계: 연결 확인
@@ -92,7 +92,7 @@ providers:
 
 ```bash
 curl -s https://nano-gpt.com/api/v1/chat/completions \
-  -H "Authorization: Bearer $NANOGPT_API_KEY" \
+  -H "Authorization: Bearer *** \
   -H "Content-Type: application/json" \
   -d '{
     "model": "deepseek/deepseek-v4-flash",
@@ -107,7 +107,7 @@ curl -s https://nano-gpt.com/api/v1/chat/completions \
 
 ```bash
 curl -s https://nano-gpt.com/api/v1/models \
-  -H "Authorization: Bearer $NANOGPT_API_KEY" | python3 -m json.tool | head -20
+  -H "Authorization: Bearer *** | python3 -m json.tool | head -20
 ```
 
 ### Hermes에서 모델 전환

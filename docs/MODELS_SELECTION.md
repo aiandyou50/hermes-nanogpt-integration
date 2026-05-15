@@ -6,7 +6,7 @@ NanoGPT의 600+ 모델 중 원하는 모델만 선택하여 Hermes AI에 등록�
 
 ## 핵심: discover_models 설정
 
-Hermes는 기본적으로 공급자 API에서 **전체 모델 목록을 가져와서** 표시합니다. NanoGPT는 600+ 모델이 있으므로, 설정하지 않으면 목록이混乱됩니다.
+Hermes는 기본적으로 공급자 API에서 **전체 모델 목록을 가져와서** 표시합니다. NanoGPT는 600+ 모델이 있으므로, 설정하지 않으면 목록이혼란됩니다.
 
 **반드시 `discover_models: false`를 설정하세요:**
 
@@ -62,7 +62,7 @@ hermes gateway restart
 
 ```bash
 curl -s https://nano-gpt.com/api/v1/models \
-  -H "Authorization: Bearer $NANOGPT_API_KEY" \
+  -H "Authorization: Bearer *** \
   | python3 -c "
 import sys, json
 data = json.load(sys.stdin)
@@ -78,7 +78,7 @@ print(f'\n총 {len(models)}개 모델')
 ```bash
 # DeepSeek 관련 모델만
 curl -s https://nano-gpt.com/api/v1/models \
-  -H "Authorization: Bearer $NANOGPT_API_KEY" \
+  -H "Authorization: Bearer *** \
   | python3 -c "
 import sys, json
 data = json.load(sys.stdin)
@@ -89,7 +89,7 @@ for m in sorted(models):
 
 # Qwen 관련 모델만
 curl -s https://nano-gpt.com/api/v1/models \
-  -H "Authorization: Bearer $NANOGPT_API_KEY" \
+  -H "Authorization: Bearer *** \
   | python3 -c "
 import sys, json
 data = json.load(sys.stdin)
@@ -107,7 +107,7 @@ for m in sorted(models):
 
 ```bash
 curl -s https://nano-gpt.com/api/v1/chat/completions \
-  -H "Authorization: Bearer $NANOGPT_API_KEY" \
+  -H "Authorization: Bearer *** \
   -H "Content-Type: application/json" \
   -d '{
     "model": "모델명-여기에-입력",
@@ -120,7 +120,7 @@ curl -s https://nano-gpt.com/api/v1/chat/completions \
 
 ```bash
 curl -s https://nano-gpt.com/api/v1/chat/completions \
-  -H "Authorization: Bearer $NANOGPT_API_KEY" \
+  -H "Authorization: Bearer *** \
   -H "Content-Type: application/json" \
   -d '{
     "model": "모델명-여기에-입력",
