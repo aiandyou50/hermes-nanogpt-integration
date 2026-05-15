@@ -34,6 +34,7 @@ hermes-nanogpt-integration/
 ├── LICENSE                            # MIT 라이선스
 │
 ├── docs/                              # 핵심 가이드 문서
+│   ├── AUTO_SETUP_PROMPT.md           # ⭐ AI 에이전트 자동 설정 프롬프트
 │   ├── SETUP_GUIDE.md                # ⭐ NanoGPT 공급자 추가 (시작점)
 │   ├── RECOMMENDED_MODELS.md         # ⭐ 추천 모델 27개 목록
 │   ├── MODELS_SELECTION.md           # 모델 선택 및 관리
@@ -47,7 +48,18 @@ hermes-nanogpt-integration/
     └── agent_prompt.md               # AI 에이전트 프롬프트 템플릿
 ```
 
-## 🚀 빠른 시작
+## ⚡ 원클릭 자동 설정 (추천)
+
+**[`docs/AUTO_SETUP_PROMPT.md`](./docs/AUTO_SETUP_PROMPT.md)**의 내용을 복사하여 AI 에이전트에게 전달하세요. 에이전트가 자동으로:
+1. 가이드 레포지토리를 pull/분석
+2. 사용자에게 모델 선택 받기
+3. API 키 확인
+4. config.yaml 자동 수정
+5. 연결 검증 + 게이트웨이 재시작
+
+**수동 설정이 필요하면 아래를 따라하세요:**
+
+## 🚀 수동 시작
 
 1. **[SETUP_GUIDE.md](./docs/SETUP_GUIDE.md)** — NanoGPT API 키 획득 + config.yaml 설정
 2. **[RECOMMENDED_MODELS.md](./docs/RECOMMENDED_MODELS.md)** — 추천 모델 27개 확인
@@ -65,6 +77,7 @@ hermes-nanogpt-integration/
 
 | 문서 | 대상 | 설명 |
 |------|------|------|
+| **AUTO_SETUP_PROMPT.md** | 모두 | ⭐ AI 에이전트에게 전달하는 자동 설정 프롬프트 |
 | **SETUP_GUIDE.md** | 초보자 | API 키 → config.yaml 설정 → 검증까지 단계별 |
 | **RECOMMENDED_MODELS.md** | 모두 | 카테고리별 검증된 모델 27개 |
 | **MODELS_SELECTION.md** | 중급자 | 모델 추가/제거, API 조회, tool calling 확인 |
