@@ -1,177 +1,133 @@
-# 추천 모델 목록
+# 추천 모델 목록 (2026년 5월 기준)
 
-## 📋 문서 설명
+NanoGPT에서 Hermes AI와 함께 사용하기 위해 검증된 모델 목록입니다.
 
-이 문서는 **NanoGPT의 600개 이상 모델 중에서 검증되고 추천하는 우수 모델들의 목록**을 제공합니다. 커뮤니티와 주인 레포지토리에서 추천하는 모델들을 카테고리별로 정리했습니다.
-
----
-
-## 🎯 작성 지침
-
-다음 내용을 작성해주세요:
-
-### 📌 포함되어야 할 섹션
-
-#### 1. **분류 기준 설명**
-- 모델을 어떻게 분류했는지 설명
-- 각 카테고리의 정의
-- 선택 기준
-
-#### 2. **카테고리별 모델 목록**
-
-**필수 카테고리:**
-
-**A. 🎯 일반 텍스트 처리 모델**
-- 모델명
-- 주요 특징 (3-4줄)
-- 추천 용도
-- 평균 응답 시간
-- 비용 (무료/유료)
-
-**B. 🖼️ 이미지 생성/처리 모델**
-- 모델명
-- 해상도 지원
-- 생성 속도
-- 스타일 다양성
-- 비용
-
-**C. ⚡ 빠른 응답 모델**
-- 모델명
-- 응답 시간 (ms)
-- 정확도 점수
-- 토큰 효율
-- 사용 시나리오
-
-**D. 🔬 특화 모델**
-- 코딩/프로그래밍
-- 번역/언어
-- 데이터 분석
-- 학술/연구
-- 의료/과학
-
-#### 3. **모델 성능 비교**
-- 비교표 (응답 속도, 정확도, 비용, 토큰 사용)
-- 그래프 또는 시각화 (선택)
-
-#### 4. **상황별 모델 조합**
-- **조합 1**: "빠른 응답이 필요한 채팅 서비스"
-  - 사용할 모델: Model A + Model B
-  - 이유
-
-- **조합 2**: "고품질 이미지 생성 필요"
-  - 사용할 모델
-  - 이유
-
-- **조합 3**: "비용 최적화 필요"
-  - 사용할 모델
-  - 예상 비용
-
-- **조합 4**: "다목적 AI 에이전트"
-  - 사용할 모델 (3-5개)
-  - 각 모델의 역할
-
-#### 5. **모델 선택 의사결정 트리**
-- "어떤 모델을 선택해야 하나?"
-- 질문 기반 의사결정 플로우
-- 최종 모델 추천
-
-#### 6. **주의사항 및 제한**
-- 각 모델의 제한사항
-- 토큰 제한
-- 일일/주간 제한
-- 라이선스 제한
-
-#### 7. **모델 업데이트 정보**
-- 마지막 업데이트 날짜
-- 새로운 모델 추가
-- 모델 개선 사항
+> 💡 모든 모델은 NanoGPT $12/월 멤버십으로 주 60,000,000 토큰 내에서 사용 가능합니다.
 
 ---
 
-## 📝 작성 형식
+## 🏆 최우선 추천 모델
 
-### 제목 구조
-```markdown
-# 추천 모델 목록
+### DeepSeek V4 시리즈
 
-## 📋 문서 설명
+| 모델 | 특징 | 추천 용도 |
+|------|------|----------|
+| `deepseek/deepseek-v4-flash` | 빠르고 저렴, tool calling 지원 | **일반 대화, 에이전트 작업** |
+| `deepseek/deepseek-v4-pro` | 고품질, tool calling 지원 | 복잡한 추론, 코드 생성 |
+| `deepseek/deepseek-v4-pro-cheaper` | Pro 대비 저렴 | Pro 품질 + 비용 절감 |
+| `deepseek/deepseek-latest` | 항상 최신 버전 | 최신 기능 사용 시 |
 
-## 분류 기준
+> 💡 `:thinking` 접미사를 붙이면 reasoning 모드가 활성화됩니다. (예: `deepseek/deepseek-v4-flash:thinking`)
+> 더 깊은 추론이 가능하지만 응답 시간이 길어지고 토큰 소비가 늘어납니다.
 
-## 🎯 일반 텍스트 처리
+### Xiaomi MiMo
 
-### 모델: Model-Name-1
-- **특징**: ...
-- **추천 용도**: ...
-- **응답 시간**: ...
-- **비용**: ...
+| 모델 | 특징 | 추천 용도 |
+|------|------|----------|
+| `xiaomi/mimo-v2.5-pro` | 균형 잡힌 성능 | **범용 메인 모델** |
 
-### 모델: Model-Name-2
+### Moonshot Kimi
 
-## 🖼️ 이미지 생성/처리
+| 모델 | 특징 | 추천 용도 |
+|------|------|----------|
+| `moonshotai/kimi-k2.6` | 빠른 응답, 한국어 잘함 | 한국어 작업, 일반 대화 |
+| `moonshotai/kimi-k2.6:thinking` | reasoning 모드 | 복잡한 분석, 추론 |
 
-## ⚡ 빠른 응답 모델
+---
 
-## 🔬 특화 모델
+## 🎯 카테고리별 모델
 
-### 코딩/프로그래밍
-- Model A
-- Model B
+### 🗣️ 일반 대화 및 한국어
 
-### 번역/언어
+| 모델 | Tool Calling | 비고 |
+|------|:---:|------|
+| `xiaomi/mimo-v2.5-pro` | ✅ | 균형 잡힌 범용 모델 |
+| `moonshotai/kimi-k2.6` | ✅ | 한국어 강점 |
+| `deepseek/deepseek-v4-flash` | ✅ | 빠르고 안정적 |
 
-## 성능 비교표
+### 🧠 추론 및 코딩 (Reasoning)
 
-| 모델명 | 응답시간(ms) | 정확도 | 월간비용 | 추천 용도 |
-|--------|-------------|--------|---------|----------|
-| Model-1 | 100 | 95% | $10 | 채팅 |
+| 모델 | Tool Calling | 비고 |
+|------|:---:|------|
+| `deepseek/deepseek-v4-pro:thinking` | ✅ | 최고 품질 추론 |
+| `deepseek/deepseek-v4-flash:thinking` | ✅ | 저렴한 reasoning |
+| `moonshotai/kimi-k2.6:thinking` | ✅ | 한국어 reasoning |
+| `zai-org/glm-5.1:thinking` | ✅ | GLM reasoning |
 
-## 상황별 모델 조합
+### 💻 코딩 특화
 
-### 시나리오 1: 빠른 응답이 필요
-- 모델 선택: ...
-- 이유: ...
+| 모델 | Tool Calling | 비고 |
+|------|:---:|------|
+| `deepseek/deepseek-v4-pro` | ✅ | 코드 생성 최강 |
+| `deepseek/deepseek-v4-pro-cheaper` | ✅ | 비용 효율적 코딩 |
+| `minimax/minimax-m2.7` | ✅ | 대안 모델 |
 
-## 의사결정 트리
+### 📚 롤플레이 / 창작 (Derestricted)
 
+> ⚠️ 이 모델들은 제한이 완화된 파인튜닝 버전입니다. 롤플레이, 창작 글쓰기에 적합합니다.
+> Tool calling은 지원하지 않을 수 있으므로 에이전트 작업보다는 대화 용도로 사용하세요.
+
+| 모델 | 비고 |
+|------|------|
+| `Gemma-4-31B-DarkIdol` | 인기 롤플레이 모델 |
+| `Gemma-4-31B-Queen` | Gemma 기반 |
+| `Gemma-4-31B-Cognitive-Unshackled` | 창의적 글쓰기 |
+| `gemma-4-31B-MeroMero` | 일본 스타일 |
+| `Qwen3.5-27B-Queen-Derestricted` | Qwen 기반 롤플레이 |
+| `Qwen3.5-27B-RpRMax-v1` | 롤플레이 특화 |
+| `Qwen3.5-27B-NaNovel-Derestricted` | 소설/이야기 |
+| `Qwen3.5-27B-BlueStar-v3-Derestricted` | 다목적 |
+| `Qwen3.5-27B-Infracelestial` | 판타지 |
+| `Qwen3.5-27B-earica-Derestricted` | 대화 특화 |
+| `Qwen3.5-27B-Marvin-DPO-V2-Derestricted` | DPO 최적화 |
+| `Qwen3.5-27B-Omega-Evolution-v2.2-Derestricted` | 진화형 |
+
+### 🔬 기타
+
+| 모델 | Tool Calling | 비고 |
+|------|:---:|------|
+| `zai-org/glm-5.1` | ✅ | 중국어 강점 |
+| `huihui-ai/DeepSeek-R1-Distill-Qwen-32B-abliterated` | ❌ | 탈감화 모델 |
+| `nousresearch/hermes-3-llama-3.1-70b` | ❌ | Hermes 원본 모델 |
+
+---
+
+## 📊 용도별 추천 조합
+
+### 🤖 에이전트 모드 (Tool Calling 필수)
 ```
-당신의 필요?
-├─ 빠른 응답 → Model A 추천
-├─ 고품질 이미지 → Model B 추천
-└─ 비용 최적화 → Model C 추천
+메인: deepseek/deepseek-v4-flash
+서브: xiaomi/mimo-v2.5-pro
+추론: deepseek/deepseek-v4-pro:thinking
 ```
 
-## 주의사항
+### 💬 한국어 대화
 ```
-⚠️ Model-Name: 일일 100개 이미지만 생성 가능 (12달러 멤버십 기준)
+메인: moonshotai/kimi-k2.6
+서브: xiaomi/mimo-v2.5-pro
 ```
+
+### 📖 롤플레이 / 창작
+```
+메인: Gemma-4-31B-DarkIdol
+서브: Qwen3.5-27B-Queen-Derestricted
+대안: Qwen3.5-27B-RpRMax-v1
+```
+
+### 💰 비용 최적화
+```
+메인: deepseek/deepseek-v4-flash
+서브: deepseek/deepseek-v4-pro-cheaper
 ```
 
 ---
 
-## 💡 작성 팁
+## 🔄 모델 업데이트
 
-✅ **구체적인 모델명**: 실제 NanoGPT에 있는 모델명 사용
-✅ **성능 수치**: 응답 시간, 정확도 등 구체적인 수치 포함
-✅ **비교 용이**: 표와 그래프로 모델 비교 쉽게
-✅ **실제 사용 시나리오**: "당신이 이렇게 하고 싶다면..." 형식
-✅ **업데이트 정보**: 모델이 언제 업데이트되었는지 표시
-✅ **토큰 비용 명시**: 각 모델의 예상 토큰 사용량
-✅ **라이선스 정보**: 오픈소스 vs 상용 명시
+- **마지막 업데이트**: 2026년 5월 16일
+- 모델 가용성은 NanoGPT 사정에 따라 변경될 수 있습니다.
+- 새 모델이 추가되면 `~/.hermes/config.yaml`의 `models:` 목록에 수동으로 추가해야 합니다.
 
 ---
 
-## 🎯 작성 목표
-
-이 문서를 읽은 사용자가 다음을 할 수 있어야 합니다:
-- ✅ NanoGPT의 우수 모델 파악
-- ✅ 자신의 필요에 맞는 모델 빠르게 찾기
-- ✅ 모델 조합으로 최적의 성능 달성
-- ✅ 비용 대비 효율 극대화
-- ✅ 토큰 사용량 예측
-
----
-
-**관련 문서**: 
-- [MODELS_SELECTION.md](./MODELS_SELECTION.md)
-- [QUICK_START.md](./QUICK_START.md)
+**관련 문서**: [SETUP_GUIDE.md](./SETUP_GUIDE.md) | [MODELS_SELECTION.md](./MODELS_SELECTION.md)

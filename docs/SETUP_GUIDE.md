@@ -1,122 +1,141 @@
 # NanoGPT를 Hermes AI 공급자로 추가하기
 
-## 📋 문서 설명
-
-이 문서는 NanoGPT 12달러 멤버십 구독 후 **NanoGPT를 Hermes AI 에이전트의 추가 공급자로 설정하는 단계별 가이드**입니다.
-
----
-
-## 🎯 작성 지침
-
-다음 내용을 작성해주세요:
-
-### 📌 포함되어야 할 섹션
-
-#### 1. **전제 조건**
-- NanoGPT 12달러 멤버십 구독 필요
-- NanoGPT API 키 확보 방법
-- Hermes AI 설치 및 실행 요구사항
-- 필요한 프로그래밍 언어/패키지
-
-#### 2. **NanoGPT API 키 획득 방법**
-- NanoGPT 대시보드 접속 방법
-- 로그인 및 멤버십 확인 절차
-- API 키 생성 단계
-- API 키 저장 및 보관 방법
-
-#### 3. **Hermes AI에서 공급자 추가하기**
-- `/model` 명령어 사용 방법
-- NanoGPT를 공급자로 등록하는 단계
-- 설정 파일 수정 방법 (있는 경우)
-- 필요한 파라미터 설명
-
-#### 4. **API 연결 확인**
-- 연결 테스트 방법
-- 성공적인 연결 표시
-- 모델 로드 확인
-- 기본적인 쿼리 테스트
-
-#### 5. **코드 예시**
-- Python 코드 예시
-- JavaScript/Node.js 코드 예시 (선택)
-- 기타 언어 예시 (선택)
-- 각 예시마다 주석 포함
-
-#### 6. **문제 해결 (Troubleshooting)**
-- API 키 인증 오류 해결
-- 연결 실패 해결
-- 모델 로드 문제 해결
-- 일반적인 오류 메시지 및 해결책
-
-#### 7. **다음 단계**
-- [MODELS_SELECTION.md](./MODELS_SELECTION.md) 링크
-- 모델 선택 가이드로의 연결
-
----
-
-## 📝 작성 형식
-
-### 제목 구조
-```markdown
-# NanoGPT를 Hermes AI 공급자로 추가하기
-
-## 📋 문서 설명
-...
+Hermes AI에 NanoGPT를 커스텀 공급자로 등록하여 600개 이상의 AI 모델을 활용하는 방법을 안내합니다.
 
 ## 전제 조건
-### 요구사항
-- 항목 1
-- 항목 2
 
-## NanoGPT API 키 획득
-### 단계 1: 대시보드 접속
-...
+- **NanoGPT 구독**: $12/월 멤버십 가입 (주 60,000,000 토큰, 일 100 이미지)
+- **Hermes AI**: 로컬 또는 서버에 설치 완료 (`hermes --version`으로 확인)
+- **NanoGPT API 키**: 대시보드에서 발급
 
-### 단계 2: ...
+## 1단계: NanoGPT API 키 획득
 
-## 코드 예시
-### Python
-\`\`\`python
-코드 내용
-\`\`\`
+1. https://nano-gpt.com/ 접속 후 로그인
+2. 대시보드에서 **API Keys** 메뉴 진입
+3. **Create New Key** 클릭
+4. 생성된 키를 복사 (형식: `sk-nano-xxxx-xxxx-xxxx`)
 
-### JavaScript
-\`\`\`javascript
-코드 내용
-\`\`\`
+> ⚠️ API 키는 한 번만 표시됩니다. 반드시 안전한 곳에 저장하세요.
+
+## 2단계: 환경 변수 설정
+
+Hermes의 `.env` 파일에 API 키를 추가합니다:
+
+```bash
+# ~/.hermes/.env 파일에 추가
+NANOGPT_API_KEY=sk-nano-여기에-실제-키-입력
 ```
 
-### 표 양식 (필요시)
-```markdown
-| 항목 | 설명 |
-|------|------|
-| API Key | NanoGPT 대시보드에서 생성 |
-| 유효기간 | 없음 (만료 없음) |
+> ⚠️ `.env` 파일에 직접 값을 넣어야 합니다. `export` 명령어는 재시작 시 사라집니다.
+
+## 3단계: config.yaml에 공급자 등록
+
+`~/.hermes/config.yaml` 파일을 열고 `providers:` 섹션에 NanoGPT를 추가합니다:
+
+```yaml
+# ~/.hermes/config.yaml
+
+providers:
+  nanogpt:
+    base_url: "https://nano-gpt.com/api/v1"
+    key_env: "NANOGPT_API_KEY"
+    discover_models: false
+    models:
+      # DeepSeek 시리즈
+      - deepseek/deepseek-latest
+      - deepseek/deepseek-v4-flash
+      - deepseek/deepseek-v4-flash:thinking
+      - deepseek/deepseek-v4-pro
+      - deepseek/deepseek-v4-pro:thinking
+      - deepseek/deepseek-v4-pro-cheaper
+      - deepseek/deepseek-v4-pro-cheaper:thinking
+      # Xiaomi MiMo
+      - xiaomi/mimo-v2.5-pro
+      # Moonshot Kimi
+      - moonshotai/kimi-k2.6
+      - moonshotai/kimi-k2.6:thinking
+      # GLM
+      - zai-org/glm-5.1
+      - zai-org/glm-5.1:thinking
+      # MiniMax
+      - minimax/minimax-m2.7
+      # Gemma (커스텀 파인튠)
+      - Gemma-4-31B-Cognitive-Unshackled
+      - Gemma-4-31B-DarkIdol
+      - gemma-4-31B-MeroMero
+      - Gemma-4-31B-Queen
+      # Qwen (커스텀 파인튠)
+      - Qwen3.5-27B-Omega-Evolution-v2.2-Derestricted
+      - Qwen3.5-27B-BlueStar-v3-Derestricted
+      - Qwen3.5-27B-Infracelestial
+      - Qwen3.5-27B-RpRMax-v1
+      - Qwen3.5-27B-earica-Derestricted
+      - Qwen3.5-27B-Marvin-DPO-V2-Derestricted
+      - Qwen3.5-27B-NaNovel-Derestricted
+      - Qwen3.5-27B-Queen-Derestricted
+      # 기타
+      - huihui-ai/DeepSeek-R1-Distill-Qwen-32B-abliterated
+      - nousresearch/hermes-3-llama-3.1-70b
 ```
 
+### ⚠️ 꼭 알아야 할 설정
+
+| 설정 | 값 | 이유 |
+|------|-----|------|
+| `key_env` | `"NANOGPT_API_KEY"` | **`api_key_env`가 아닙니다!** 이 필드명을 틀리면 401 오류가 발생합니다 |
+| `discover_models` | `false` | **안 하면 API의 600+개 모델이 모두 로드되어 목록이混乱됩니다** |
+| `base_url` | `"https://nano-gpt.com/api/v1"` | 반드시 `/v1` 포함 |
+
+## 4단계: 연결 확인
+
+### API 키 동작 테스트
+
+```bash
+curl -s https://nano-gpt.com/api/v1/chat/completions \
+  -H "Authorization: Bearer $NANOGPT_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "deepseek/deepseek-v4-flash",
+    "messages": [{"role": "user", "content": "Hello"}],
+    "max_tokens": 10
+  }'
+```
+
+정상 응답이 오면 API 키가 올바른 것입니다.
+
+### 모델 목록 확인
+
+```bash
+curl -s https://nano-gpt.com/api/v1/models \
+  -H "Authorization: Bearer $NANOGPT_API_KEY" | python3 -m json.tool | head -20
+```
+
+### Hermes에서 모델 전환
+
+게이트웨이를 재시작한 후:
+
+```
+/model nanogpt:deepseek/deepseek-v4-flash
+```
+
+> 💡 모델명 형식은 `공급자:모델명`입니다. 슬래시(`/`)가 아닌 **콜론(`:`)**으로 구분합니다.
+
+## 5단계: 기본 모델 설정 (선택)
+
+특정 모델을 기본값으로 설정하려면:
+
+```yaml
+# ~/.hermes/config.yaml
+model:
+  default: "nanogpt:deepseek/deepseek-v4-flash"
+```
+
+## 다음 단계
+
+- [추천 모델 목록](./RECOMMENDED_MODELS.md) — 카테고리별 검증된 모델
+- [모델 선택 가이드](./MODELS_SELECTION.md) — 커스텀 모델 목록 관리
+- [트러블슈팅](./TROUBLESHOOTING.md) — 문제 해결
+
 ---
 
-## 💡 작성 팁
-
-✅ **명확한 단계별 설명**: 각 단계가 독립적으로 이해 가능하도록 작성
-✅ **스크린샷 설명**: 필요시 "대시보드의 설정 페이지에서..." 등으로 위치 설명
-✅ **주의사항 강조**: 보안 관련 내용은 `> ⚠️` 형식으로 강조
-✅ **검증 방법 제시**: 각 단계 후 "다음 명령어로 확인..." 등으로 검증 방법 제시
-✅ **코드 완성도**: 코드는 복사해서 바로 실행 가능해야 함
-✅ **에러 메시지 포함**: 실제 발생할 수 있는 에러 메시지와 해결책
-
----
-
-## 🎯 작성 목표
-
-이 문서를 읽은 사용자가 다음을 할 수 있어야 합니다:
-- ✅ NanoGPT API 키를 성공적으로 생성
-- ✅ Hermes AI에서 NanoGPT를 공급자로 추가
-- ✅ 추가된 공급자가 정상 작동하는지 확인
-- ✅ 다음 단계인 모델 선택으로 진행
-
----
-
-**관련 문서**: 
-- [README.md](../README.md)
-- [MODELS_SELECTION.md](./MODELS_SELECTION.md)
+**관련 문서**: [README.md](../README.md) | [QUICK_START.md](./QUICK_START.md)

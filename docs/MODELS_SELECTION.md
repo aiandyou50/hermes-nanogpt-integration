@@ -1,159 +1,170 @@
-# 커스텀 모델 선택 가이드
+# 모델 선택 및 관리 가이드
 
-## 📋 문서 설명
-
-이 문서는 **NanoGPT의 600개 이상 모델 중에서 자신이 원하는 모델만 선택하여 Hermes AI에 추가하는 방법**을 설명합니다.
+NanoGPT의 600+ 모델 중 원하는 모델만 선택하여 Hermes AI에 등록하는 방법을 설명합니다.
 
 ---
 
-## 🎯 작성 지침
+## 핵심: discover_models 설정
 
-다음 내용을 작성해주세요:
+Hermes는 기본적으로 공급자 API에서 **전체 모델 목록을 가져와서** 표시합니다. NanoGPT는 600+ 모델이 있으므로, 설정하지 않으면 목록이混乱됩니다.
 
-### 📌 포함되어야 할 섹션
+**반드시 `discover_models: false`를 설정하세요:**
 
-#### 1. **문제 정의**
-- NanoGPT의 600개 이상 모델 문제점
-- Hermes AI에서 모든 모델을 표시하기 어려운 이유
-- 사용자 경험 개선의 필요성
-
-#### 2. **모델 선택의 5가지 방법**
-각 방법마다 다음을 포함:
-- 방법의 이름과 설명
-- 실제 적용 단계
-- 코드 예시
-- 장점과 단점
-
-**포함할 방법들:**
-1. **모델명 필터링**: 특정 키워드로 모델 찾기
-2. **카테고리별 선택**: 용도별로 모델 그룹화
-3. **성능 기반 선택**: 응답 속도, 정확도 기준
-4. **라이선스/비용 기반**: 무료 vs 유료 모델
-5. **최신성 기준**: 모델 업데이트 날짜 고려
-
-#### 3. **수동 모델 설정 절차**
-- 설정 파일 수정 방법
-- JSON/YAML 형식 예시
-- 필드 설명 (모델명, API 버전 등)
-- 저장 및 적용 방법
-
-#### 4. **모델 조합 전략**
-- 여러 모델을 동시에 추가하는 방법
-- 작업별 모델 조합 추천
-  - 텍스트 생성: Model A, B
-  - 이미지: Model C, D
-  - 특화 작업: Model E
-
-#### 5. **실제 예시**
-- 시나리오 1: "일반 텍스트 생성 용도"
-- 시나리오 2: "이미지 중심 작업"
-- 시나리오 3: "빠른 응답 필요"
-- 각 시나리오마다 권장 모델과 설정 코드
-
-#### 6. **검증 및 테스트**
-- 선택한 모델이 로드되는지 확인하는 방법
-- `/model` 명령어로 모델 목록 확인
-- 실제 모델 호출 테스트
-- 성능 측정 방법
-
-#### 7. **추가 팁**
-- 모델 선택 시 고려사항
-- 비용 최적화 전략
-- 토큰 사용량 추정
-
-#### 8. **다음 단계**
-- [RECOMMENDED_MODELS.md](./RECOMMENDED_MODELS.md) 링크
-- 추천 모델 목록으로의 연결
-
----
-
-## 📝 작성 형식
-
-### 제목 구조
-```markdown
-# 커스텀 모델 선택 가이드
-
-## 문제: 모델 과다
-
-## 해결책: 수동 모델 선택
-
-### 방법 1: 모델 이름 필터링
-**설명**: ...
-
-**단계**:
-1. ...
-2. ...
-
-**코드 예시**:
-\`\`\`python
-코드
-\`\`\`
-
-**장점**: 
-- ...
-
-**단점**: 
-- ...
-
-### 방법 2: ...
-
-## 설정 파일 수정
-
-### JSON 형식
-\`\`\`json
-{
-  "providers": [
-    {
-      "name": "nanogpt",
-      "models": [
-        "model-1",
-        "model-2"
-      ]
-    }
-  ]
-}
-\`\`\`
-
-## 실제 예시
-
-### 예시 1: 텍스트 생성 중심
-...
-
-### 예시 2: ...
-```
-
-### 표 양식
-```markdown
-| 방법 | 난이도 | 장점 | 단점 |
-|------|--------|------|------|
-| 필터링 | 낮음 | 빠름 | 세밀함 부족 |
-| 카테고리 | 중간 | 체계적 | 시간 소요 |
+```yaml
+providers:
+  nanogpt:
+    base_url: "https://nano-gpt.com/api/v1"
+    key_env: "NANOGPT_API_KEY"
+    discover_models: false   # ← 필수
+    models:
+      - 원하는 모델만 나열
 ```
 
 ---
 
-## 💡 작성 팁
+## 모델 추가/제거 방법
 
-✅ **5가지 방법 모두 구체적으로**: 각 방법이 실용적이고 테스트 가능해야 함
-✅ **코드는 복사-붙여넣기 가능**: 사용자가 바로 사용 가능한 완전한 코드
-✅ **비교표 제시**: 5가지 방법의 장단점을 비교하는 표
-✅ **시나리오별 추천**: "당신이 이런 작업을 한다면 이 방법을..." 형식
-✅ **검증 방법 제시**: 선택 후 정말 작동하는지 확인하는 방법
-✅ **토큰 비용 언급**: 각 모델의 예상 비용
+### 1. config.yaml 직접 수정
+
+```bash
+# 설정 파일 열기
+nano ~/.hermes/config.yaml
+```
+
+`providers.nanogpt.models:` 섹션에 모델을 추가하거나 제거합니다:
+
+```yaml
+providers:
+  nanogpt:
+    models:
+      # 여기에 원하는 모델만 나열
+      - deepseek/deepseek-v4-flash
+      - xiaomi/mimo-v2.5-pro
+      - moonshotai/kimi-k2.6
+      # 새 모델 추가 ↓
+      - 새-모델-이름
+```
+
+### 2. 게이트웨이 재시작
+
+변경 후 반드시 재시작:
+```bash
+hermes gateway restart
+```
+
+또는 텔레그램에서 `/restart`
 
 ---
 
-## 🎯 작성 목표
+## NanoGPT에서 사용 가능한 모델 확인
 
-이 문서를 읽은 사용자가 다음을 할 수 있어야 합니다:
-- ✅ 600개 이상의 모델을 효과적으로 필터링
-- ✅ 자신의 필요에 맞는 모델 5-10개 선택
-- ✅ 선택한 모델을 설정 파일에 추가
-- ✅ 모델이 정상 작동하는지 검증
-- ✅ 비용과 성능의 최적 균형 달성
+### API로 전체 모델 목록 조회
+
+```bash
+curl -s https://nano-gpt.com/api/v1/models \
+  -H "Authorization: Bearer $NANOGPT_API_KEY" \
+  | python3 -c "
+import sys, json
+data = json.load(sys.stdin)
+models = [m['id'] for m in data.get('data', [])]
+for m in sorted(models):
+    print(m)
+print(f'\n총 {len(models)}개 모델')
+"
+```
+
+### 특정 키워드로 모델 검색
+
+```bash
+# DeepSeek 관련 모델만
+curl -s https://nano-gpt.com/api/v1/models \
+  -H "Authorization: Bearer $NANOGPT_API_KEY" \
+  | python3 -c "
+import sys, json
+data = json.load(sys.stdin)
+models = [m['id'] for m in data.get('data', []) if 'deepseek' in m['id'].lower()]
+for m in sorted(models):
+    print(m)
+"
+
+# Qwen 관련 모델만
+curl -s https://nano-gpt.com/api/v1/models \
+  -H "Authorization: Bearer $NANOGPT_API_KEY" \
+  | python3 -c "
+import sys, json
+data = json.load(sys.stdin)
+models = [m['id'] for m in data.get('data', []) if 'qwen' in m['id'].lower()]
+for m in sorted(models):
+    print(m)
+"
+```
 
 ---
 
-**관련 문서**: 
-- [SETUP_GUIDE.md](./SETUP_GUIDE.md)
-- [RECOMMENDED_MODELS.md](./RECOMMENDED_MODELS.md)
+## 모델 테스트 방법
+
+### 간단한 응답 테스트
+
+```bash
+curl -s https://nano-gpt.com/api/v1/chat/completions \
+  -H "Authorization: Bearer $NANOGPT_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "모델명-여기에-입력",
+    "messages": [{"role": "user", "content": "Say hello in Korean"}],
+    "max_tokens": 50
+  }' | python3 -m json.tool
+```
+
+### Tool Calling 지원 여부 확인
+
+```bash
+curl -s https://nano-gpt.com/api/v1/chat/completions \
+  -H "Authorization: Bearer $NANOGPT_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "모델명-여기에-입력",
+    "messages": [{"role": "user", "content": "Search the web for today weather"}],
+    "tools": [{"type": "function", "function": {"name": "web_search", "parameters": {"type": "object", "properties": {"query": {"type": "string"}}}}}],
+    "max_tokens": 100
+  }' | python3 -c "
+import sys, json
+data = json.load(sys.stdin)
+choice = data.get('choices', [{}])[0]
+msg = choice.get('message', {})
+if msg.get('tool_calls'):
+    print('✅ Tool calling 지원')
+else:
+    print('❌ Tool calling 미지원 (또는 무시됨)')
+"
+```
+
+> 💡 Tool calling은 Hermes 에이전트의 핵심 기능(파일 읽기, 터미널 실행, 웹 검색 등)에 필수입니다.
+> 에이전트 모드로 사용하려면 tool calling 지원 모델을 선택하세요.
+
+---
+
+## :thinking 모델이란?
+
+모델명에 `:thinking`이 붙으면 **reasoning 모드**가 활성화됩니다:
+
+- `deepseek/deepseek-v4-flash` — 일반 모드
+- `deepseek/deepseek-v4-flash:thinking` — 추론 모드 (Chain-of-Thought)
+
+**차이점:**
+- 추론 모드는 "생각 과정"을 보여주면서 더 깊은 분석 수행
+- 응답 시간이 길어지고 토큰 소비가 늘어남
+- 복잡한 수학, 논리, 코딩 문제에 유리
+
+---
+
+## 모델 관리 팁
+
+1. **5-10개만 선택**: 너무 많으면 `/model` 전환이 불편
+2. **에이전트용 + 대화용 분리**: tool calling 지원 여부에 따라 구분
+3. **정기적으로 테스트**: NanoGPT에서 모델이 제거될 수 있음
+4. **`:thinking` 모델은 별도 카테고리**: 같은 모델의 일반/추론 버전을 구분
+
+---
+
+**관련 문서**: [RECOMMENDED_MODELS.md](./RECOMMENDED_MODELS.md) | [SETUP_GUIDE.md](./SETUP_GUIDE.md)
